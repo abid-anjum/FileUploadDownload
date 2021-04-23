@@ -1,0 +1,87 @@
+<div class="container">
+<h1>File Uploading functionality</h1>
+    <br>
+    <hr>
+    <form [formGroup]="saveFileForm" (ngSubmit)="onExpSubmit()">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4"><b>User Name</b></div>
+                    <div class="col-md-5">
+                      <input type="text" formControlName="UserName" placeholder="User Name">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                
+                <div class="row">
+                    <div class="col-md-6"><b>Upload Resume</b></div>
+                    <div class="col-md-6">
+                            <input type='file' #resumeInput><br>
+                    </div>
+
+                </div>
+           
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2"><b>Image</b></div>
+            <div class="col-md-4">
+                    <input type='file' #logoInput (change)="onSelectFile($event.target.files)"><br>
+            </div>
+            <div class="col-md-4">
+                <img [src] ="imageUrl"  height="100" width="120">
+            </div>
+        </div>
+        <div class="row" align="center" style="padding-left: 400px;">
+
+            <button type="submit" class="button" class="btn btn-primary" color="primary">Save Details
+                </button>
+
+        </div>
+
+
+    </form>
+    <hr>
+    <div class="row" >
+        <table width="100%" class="responsive-table table-striped table-bordered table-hover">
+            <thead>
+                <tr class="btn-primary" style="height: 40px;">
+                    <th style="width:10%;">
+                        <b>User Name</b>
+                    </th>
+                    <th style="width:15%;">
+                        <b>File</b>
+                    </th>
+                   
+                    <th style="width:20%;">
+                        <b>Image</b>
+                    </th>
+                 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of lstFileDetails">
+                     
+                    <td><span>{{item.UserName}}</span></td>
+                    <td><span>   <button (click)="downloadImage(item)" class="btn btn-link">
+                        <span>&nbsp;  <img [src] ="item.Image" height="60" width="60"></span>
+                      </button> </span>
+                    </td>
+               <td>
+                <button (click)="downloadDocFile(item)" class="btn btn-link">
+                    <span class="fa fa-download">&nbsp; {{item.DocFile}}</span>
+                  </button>
+               </td>
+                   
+                </tr>
+            </tbody>
+        </table>
+        <br>
+     
+    </div>
+</div>
